@@ -29,35 +29,35 @@ struct Point{
 struct Rectangle{
     Point point;
 
-     //Конструктор нулевого прямоугольника
-     Rectangle():
-        point(0,0){}
-     //Конструктор заданного прямоугольника
+    //Конструктор нулевого прямоугольника
+    Rectangle():
+            point(0,0){}
+    //Конструктор заданного прямоугольника
 
-     Rectangle(Point const &point):
-        point(point){}
+    Rectangle(Point const &point):
+            point(point){}
 
-     //К-р копирования
-     Rectangle(const Rectangle &ref_rect):
-        point(ref_rect.point){}
-
-    Rectangle operator+(Rectangle const &rect) const{
-         Point new_point = Point(point.minx(rect.point).x, point.miny(rect.point).y);
-         return (Rectangle(new_point));
-     }
+    //К-р копирования
+    Rectangle(const Rectangle &ref_rect):
+            point(ref_rect.point){}
 
     Rectangle operator*(Rectangle const &rect) const{
+        Point new_point = Point(point.minx(rect.point).x, point.miny(rect.point).y);
+        return (Rectangle(new_point));
+    }
+
+    Rectangle operator+(Rectangle const &rect) const{
         Point new_point = Point(point.maxx(rect.point).x, point.maxy(rect.point).y);
         return (Rectangle(new_point));
     }
 
-    void print() const{
-         std::cout << '(' << point.x << ' ' << point.y << ')' << std::endl;
-     }
-
     //Деструктор (стандартный)
     ~Rectangle() = default;
 };
+
+std::ostream& operator<<(std::ostream& output_place, const Rectangle& rect){
+    output_place << '(' << rect.point.x << ' ' << rect.point.y << ')' << std::endl;
+}
 
 int main() {
     Point p_10_5 = Point(10, 5);
@@ -66,12 +66,13 @@ int main() {
     Rectangle rect_10_5 = Rectangle(p_10_5);
     Rectangle rect_3_20 = Rectangle(p_3_20);
 
-    (rect_0_0+rect_10_5).print();
-    (rect_0_0*rect_3_20).print();
-    (rect_3_20+rect_10_5).print();
-    (rect_10_5*rect_3_20).print();
-    (rect_3_20+rect_3_20).print();
-    (rect_3_20*rect_3_20).print();
+    std::cout << rect_3_20;
+    std::cout << (rect_0_0+rect_10_5);
+    std::cout << (rect_0_0*rect_3_20);
+    std::cout << (rect_3_20+rect_10_5);
+    std::cout << (rect_10_5*rect_3_20);
+    std::cout << (rect_3_20+rect_3_20);
+    std::cout << (rect_3_20*rect_3_20);
 
 
     return 0;
