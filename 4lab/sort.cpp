@@ -59,6 +59,7 @@ void hoare_sort(T data[], unsigned long l, unsigned long r, Comparator<T> *comp)
         return;
     }
     unsigned long split = partition(data, l, r, data[(l+r)/2], comp);
+
     hoare_sort(data, l, split, comp);
     hoare_sort(data, split+1, r, comp);
 }
@@ -66,7 +67,7 @@ void hoare_sort(T data[], unsigned long l, unsigned long r, Comparator<T> *comp)
 int main() {
     IntComparator comp;
     int A[10] = {10, -3, 12, 5, 7, 14, 8, 63, 0, 12};
-    hoare_sort(A, 0, 10, &comp);
+    hoare_sort(A, 0, 9, &comp);
     for (int i : A) {
         std::cout << i << ' ' << ' ';
     }
@@ -74,7 +75,7 @@ int main() {
 
     LongComparator comp2;
     long B[4] = {3, 10, 18, 5};;
-    hoare_sort(B, 0, 4, &comp2);
+    hoare_sort(B, 0, 3, &comp2);
     for (long i : B) {
         std::cout << i << ' ' << ' ';
     }
@@ -82,7 +83,7 @@ int main() {
 
     IntNodeComparator comp3;
     IntNode C[5] = {IntNode('a', 120), IntNode('d', -50), IntNode('C', -10), IntNode('e', -100), IntNode('B', 30)};
-    hoare_sort(C, 0, 5, &comp3);
+    hoare_sort(C, 0, 4, &comp3);
     for (IntNode i : C) {
         std::cout << i << ' ' << ' ';
     }
