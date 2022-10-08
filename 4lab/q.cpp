@@ -1,4 +1,3 @@
-
 #include <iostream>
 using std::cout;
 
@@ -28,7 +27,7 @@ struct Queue {
         NowSize = -1;
     }
 
-    void ShiftUp(int i) //Поднимаем элемент под номером i
+    void ShiftUp(int i)
     {
         while (i > 0 && comp->operator()(first[parent(i)], first[i])) {
             std::swap(first[parent(i)], first[i]);
@@ -36,7 +35,7 @@ struct Queue {
         }
     }
 
-    void shiftDown(int i) //Опускаем
+    void shiftDown(int i)
     {
         int maxIndex = i;
         int l = leftChild(i);
@@ -44,11 +43,11 @@ struct Queue {
             maxIndex = l;
         }
 
+
         int r = rightChild(i);
         if (r <= NowSize && comp->operator()(first[maxIndex], first[r])) {
             maxIndex = r;
         }
-
 
         if (i != maxIndex) {
             std::swap(first[i], first[maxIndex]);
@@ -59,13 +58,14 @@ struct Queue {
 
     bool is_empty(){
         if (NowSize == 0){return true;}};
-    //Пусто ли?
-
     void push(T new_one){
-        NowSize = NowSize + 1;
-        first[NowSize] = new_one;
+        if (NowSize == MaxSize-1){
+            return;
+        };
+            NowSize = NowSize + 1;
+            first[NowSize] = new_one;
 
-        ShiftUp(NowSize);
+            ShiftUp(NowSize);
     }; //добавить новый
     T peek(){
         return first[0];
@@ -78,7 +78,7 @@ struct Queue {
 
     void free(){
         delete[] first;
-    } //Типа деструктора, но функцией
+    }
 };
 
 struct IntNode{
@@ -87,7 +87,7 @@ struct IntNode{
     IntNode(char a, int n){name = a; pr = n;}
     IntNode() = default;
 
-}; //Класс для проверки
+};
 
 std::ostream& operator<<(std::ostream& output_place, const IntNode& in){
     output_place << in.name;
@@ -104,7 +104,7 @@ struct IntComparator final: Comparator<int>{
     bool operator()(int const &lha, int const &rha) const override {
         return lha < rha;
     }
-}; //Компаратор для int
+};
 
 int main() {
     IntComparator comp1;
@@ -113,7 +113,7 @@ int main() {
     q1.push(200);
     q1.push(-50);
     q1.push(10);
-    q1.push(0);
+    q1.push(1000);
 
     cout << q1.peek() << '\n';
     q1.poll();
@@ -144,7 +144,13 @@ int main() {
     cout << q2.peek() << '\n';
     q2.poll();
 
+
     q2.free();
+
+
+
+
+
     return 0;
 
 }
