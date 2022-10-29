@@ -9,7 +9,7 @@ struct Grid<T, dem>{
     using size_type = unsigned;
     T * data;
     unsigned size;
-/*РАЗМЕР БУДЕТ ПОДАВАТЬСЯ В <>*/
+
 
     //Принимет массив готовый
     Grid(T *data, size_type size) :
