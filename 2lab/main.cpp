@@ -58,6 +58,7 @@ struct Rectangle{
 
 std::ostream& operator<<(std::ostream& output_place, const Rectangle& rect){
     output_place << '(' << rect.point.x << ' ' << rect.point.y << ')' << std::endl;
+    return output_place;
 }
 std::string erase_spaces(std::string string){
     while (string.find(' ', 0) != -1){
